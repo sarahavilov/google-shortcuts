@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add or Remove a Product :: Shortcuts for Google™ Products</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+  <form class="two">
+    <span>Title</span>
+    <input type="text" id="title" required placeholder="e.g. Google Homepage">
+    <span>URL</span>
+    <input type="text" id="href" required placeholder="e.g. https://www.google.com">
+    <span>Icon</span>
+    <input type="file" id="file" required accept="image/*">
+    <span></span>
+    <input type="submit" value="Add Product">
+  </form>
+  <form id="remove">
+    <div id="products" class="two"></div>
+    <div class="two" style="margin-top: 5px;">
+      <span></span>
+      <input type="submit" value="Remove selected Product(s)" disabled>
+    </div>
+  </form>
+  <script type="text/javascript" src="index.js"></script>
+</body>
+</html>

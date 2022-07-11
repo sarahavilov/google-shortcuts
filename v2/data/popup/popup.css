@@ -1,0 +1,348 @@
+html {
+  background-color: transparent;
+}
+
+body {
+  width: 250px;
+  height: 211px;
+  overflow: auto;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  background-color: transparent;
+}
+
+table {
+  width: 100%;
+  font-size: 12px;
+  background-color: transparent;
+  font-family: arial, sans-serif;
+}
+
+table tr td {
+  background-color: transparent;
+}
+
+input {
+  width: 100%;
+  font-size: 100%;
+  text-align: center;
+  vertical-align: middle;
+  height: calc(100% - 4px);
+  background-color: transparent;
+}
+
+input[type=number] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+}
+
+html, body, table, table tr td, input {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+#shortcuts-table, #backup-table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+#shortcuts-table tr td, #backup-table tr td {
+  margin: 0;
+  padding: 0;
+  transition: 300ms ease all;
+  -moz-transition: 300ms ease all;
+  -webkit-transition: 300ms ease all;
+  border-bottom: 1px solid transparent;
+}
+
+#shortcuts-table tr td:hover, #backup-table tr td:hover {
+  cursor: pointer;
+  border-bottom: 1px solid #d14836;
+}
+
+#shortcuts-table tr td[status='empty'], #backup-table tr td[status='empty'] {
+  width: 0;
+  margin: 0;
+  border: 0;
+  height: 0;
+  padding: 0;
+  display: none;
+  cursor: default;
+  background-image: none;
+}
+
+tr td[type='emptyCell'] {
+  transition: 0 background-image;
+  -moz-transition: 0 background-image;
+  -webkit-transition: 0 background-image;
+  background: url("icons/emptyCell.png") no-repeat center center;
+}
+
+tr td[type=''] {background-image: none;}
+
+#separator-table, #backup-table, #settings-table {
+  display: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+#separator-td {
+  border: 0;
+  cursor: default;
+  text-align: center;
+  background: url("resources/dotted.png") center repeat-x;
+}
+
+#separator-td span {
+  font-size: 85%;
+  padding: 1px 5px;
+  display: inline-block;
+  font-family: arial,sans-serif;
+  background-color: rgba(255,255,255,0.7);
+}
+
+#status-div {
+  margin: 20px 0 0 0;
+}
+
+#status-table, #settings-table {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
+  border-spacing: 0;
+  background-color: rgba(0,0,0,0.05);
+  border-top: solid 1px rgba(0,0,0,0.05);
+}
+
+#settings-table {
+  table-layout: fixed;
+}
+
+#settings-table tr td {
+  width: 20%;
+  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
+}
+
+#status-td {
+  width: 100%;
+  height: 100%;
+  padding: 0 3px;
+  max-width: 40px;
+  overflow: hidden;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -moz-user-select: none;
+  text-overflow: ellipsis;
+  -webkit-user-select: none;
+  border-right: solid 1px rgba(0,0,0,0.05);
+}
+
+#more-td, #support-td, #settings-td {
+  width: 39px;
+  height: 100%;
+  opacity: 0.6;
+  min-width: 39px;
+  max-width: 39px;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#close-panel[state='close'] {background-color: rgba(0,0,0,0.2)}
+#close-panel[state='close']:hover {background-color: rgba(0,0,0,0.2) !important}
+#more-td[type='white'] {
+  background: url("resources/more-white.png") no-repeat center center;
+  background-size: 22px;
+}
+#support-td[type=white] {
+  background: url("resources/support-white.png") no-repeat center center;
+  background-size: 22px;
+}
+#settings-td[type=white] {
+  background: url("resources/settings-white.png") no-repeat center center;
+  background-size: 19px;
+}
+#more-td, #more-td[type='black'] {
+  background: url("resources/more-black.png") no-repeat center center;
+  background-size: 22px;
+}
+#support-td, #support-td[type='black'] {
+  background: url("resources/support-black.png") no-repeat center center;
+  background-size: 22px;
+}
+#more-td[type='white'][status='active'] {
+  background: url("resources/collapse-white.png") no-repeat center center;
+  background-size: 22px;
+}
+#settings-td, #settings-td[type='black'] {
+  background: url("resources/settings-black.png") no-repeat center center;
+  background-size: 19px;
+}
+#more-td[status='active'], #more-td[type='black'][status='active'] {
+  background: url("resources/collapse-black.png") no-repeat center center;
+  background-size: 22px;
+}
+
+
+#close-panel, #reset-button {
+  cursor: pointer;
+  text-align: center;
+}
+
+#more-td:hover,
+#support-td:hover,
+#settings-td:hover,
+#close-panel:hover,
+#reset-button:hover,
+#icon-size-input:hover,
+#panel-size-input:hover,
+#panel-color-input:hover {
+  opacity: 1.0;
+  background-color: rgba(0,0,0,0.03) !important;
+}
+
+tr td[type='fi'] {background: url("icons/fi.png") no-repeat center center}
+tr td[type='sky'] {background: url("icons/sky.png") no-repeat center center}
+tr td[type='duo'] {background: url("icons/duo.png") no-repeat center center}
+tr td[type='hub'] {background: url("icons/hub.png") no-repeat center center}
+tr td[type='blog'] {background: url("icons/blog.png") no-repeat center center}
+tr td[type='book'] {background: url("icons/book.png") no-repeat center center}
+tr td[type='code'] {background: url("icons/code.png") no-repeat center center}
+tr td[type='maps'] {background: url("icons/maps.png") no-repeat center center}
+tr td[type='news'] {background: url("icons/news.png") no-repeat center center}
+tr td[type='note'] {background: url("icons/note.png") no-repeat center center}
+tr td[type='play'] {background: url("icons/play.png") no-repeat center center}
+tr td[type='plus'] {background: url("icons/plus.png") no-repeat center center}
+tr td[type='site'] {background: url("icons/site.png") no-repeat center center}
+tr td[type='mars'] {background: url("icons/mars.png") no-repeat center center}
+tr td[type='wdyl'] {background: url("icons/wdyl.png") no-repeat center center}
+tr td[type='sync'] {background: url("icons/sync.png") no-repeat center center}
+tr td[type='help'] {background: url("icons/help.png") no-repeat center center}
+tr td[type='apps'] {background: url("icons/apps.png") no-repeat center center}
+tr td[type='docs'] {background: url("icons/docs.png") no-repeat center center}
+tr td[type='allo'] {background: url("icons/allo.png") no-repeat center center}
+tr td[type='tango'] {background: url("icons/tango.png") no-repeat center center}
+tr td[type='zagat'] {background: url("icons/zagat.png") no-repeat center center}
+tr td[type='drive'] {background: url("icons/drive.png") no-repeat center center}
+tr td[type='gmail'] {background: url("icons/gmail.png") no-repeat center center}
+tr td[type='earth'] {background: url("icons/earth.png") no-repeat center center}
+tr td[type='image'] {background: url("icons/image.png") no-repeat center center}
+tr td[type='music'] {background: url("icons/music.png") no-repeat center center}
+tr td[type='ideas'] {background: url("icons/ideas.png") no-repeat center center}
+tr td[type='video'] {background: url("icons/video.png") no-repeat center center}
+tr td[type='hotel'] {background: url("icons/hotel.png") no-repeat center center}
+tr td[type='voice'] {background: url("icons/voice.png") no-repeat center center}
+tr td[type='fonts'] {background: url("icons/fonts.png") no-repeat center center}
+tr td[type='forms'] {background: url("icons/forms.png") no-repeat center center}
+tr td[type='glass'] {background: url("icons/glass.png") no-repeat center center}
+tr td[type='local'] {background: url("icons/local.png") no-repeat center center}
+tr td[type='tasks'] {background: url("icons/tasks.png") no-repeat center center}
+tr td[type='admin'] {background: url("icons/admin.png") no-repeat center center}
+tr td[type='inbox'] {background: url("icons/inbox.png") no-repeat center center}
+tr td[type='admob'] {background: url("icons/admob.png") no-repeat center center}
+tr td[type='store'] {background: url("icons/store.png") no-repeat center center}
+tr td[type='groups'] {background: url("icons/groups.png") no-repeat center center}
+tr td[type='mobile'] {background: url("icons/mobile.png") no-repeat center center}
+tr td[type='picasa'] {background: url("icons/picasa.png") no-repeat center center}
+tr td[type='search'] {background: url("icons/search.png") no-repeat center center}
+tr td[type='trends'] {background: url("icons/trends.png") no-repeat center center}
+tr td[type='patent'] {background: url("icons/patent.png") no-repeat center center}
+tr td[type='wallet'] {background: url("icons/wallet.png") no-repeat center center}
+tr td[type='fusion'] {background: url("icons/fusion.png") no-repeat center center}
+tr td[type='offers'] {background: url("icons/offers.png") no-repeat center center}
+tr td[type='photos'] {background: url("icons/photos.png") no-repeat center center}
+tr td[type='script'] {background: url("icons/script.png") no-repeat center center}
+tr td[type='chrome'] {background: url("icons/chrome.png") no-repeat center center}
+tr td[type='sheets'] {background: url("icons/sheets.png") no-repeat center center}
+tr td[type='alerts'] {background: url("icons/alerts.png") no-repeat center center}
+tr td[type='express'] {background: url("icons/express.png") no-repeat center center}
+tr td[type='finance'] {background: url("icons/finance.png") no-repeat center center}
+tr td[type='scholar'] {background: url("icons/scholar.png") no-repeat center center}
+tr td[type='youtube'] {background: url("icons/youtube.png") no-repeat center center}
+tr td[type='android'] {background: url("icons/android.png") no-repeat center center}
+tr td[type='transit'] {background: url("icons/transit.png") no-repeat center center}
+tr td[type='adsense'] {background: url("icons/adsense.png") no-repeat center center}
+tr td[type='goggles'] {background: url("icons/goggles.png") no-repeat center center}
+tr td[type='privacy'] {background: url("icons/privacy.png") no-repeat center center}
+tr td[type='flights'] {background: url("icons/flights.png") no-repeat center center}
+tr td[type='domains'] {background: url("icons/domains.png") no-repeat center center}
+tr td[type='support'] {background: url("icons/support.png") no-repeat center center}
+tr td[type='blogger'] {background: url("icons/blogger.png") no-repeat center center}
+tr td[type='account'] {background: url("icons/account.png") no-repeat center center}
+tr td[type='sketchup'] {background: url("icons/sketchup.png") no-repeat center center}
+tr td[type='hangouts'] {background: url("icons/hangouts.png") no-repeat center center}
+tr td[type='business'] {background: url("icons/business.png") no-repeat center center}
+tr td[type='security'] {background: url("icons/security.png") no-repeat center center}
+tr td[type='webstore'] {background: url("icons/webstore.png") no-repeat center center}
+tr td[type='drawings'] {background: url("icons/drawings.png") no-repeat center center}
+tr td[type='shopping'] {background: url("icons/shopping.png") no-repeat center center}
+tr td[type='chromium'] {background: url("icons/chromium.png") no-repeat center center}
+tr td[type='contacts'] {background: url("icons/contacts.png") no-repeat center center}
+tr td[type='currents'] {background: url("icons/currents.png") no-repeat center center}
+tr td[type='calender'] {background: url("icons/calender.png") no-repeat center center}
+tr td[type='catalogs'] {background: url("icons/catalogs.png") no-repeat center center}
+tr td[type='tiltbrush'] {background: url("icons/tiltbrush.png") no-repeat center center}
+tr td[type='classroom'] {background: url("icons/classroom.png") no-repeat center center}
+tr td[type='translate'] {background: url("icons/translate.png") no-repeat center center}
+tr td[type='bookmarks'] {background: url("icons/bookmarks.png") no-repeat center center}
+tr td[type='webmaster'] {background: url("icons/webmaster.png") no-repeat center center}
+tr td[type='correlate'] {background: url("icons/correlate.png") no-repeat center center}
+tr td[type='inputtool'] {background: url("icons/inputtool.png") no-repeat center center}
+tr td[type='encrypted'] {background: url("icons/encrypted.png") no-repeat center center}
+tr td[type='panoramio'] {background: url("icons/panoramio.png") no-repeat center center}
+tr td[type='dashboard'] {background: url("icons/dashboard.png") no-repeat center center}
+tr td[type='analytics'] {background: url("icons/analytics.png") no-repeat center center}
+tr td[type='coordinate'] {background: url("icons/coordinate.png") no-repeat center center}
+tr td[type='streetview'] {background: url("icons/streetview.png") no-repeat center center}
+tr td[type='tagmanager'] {background: url("icons/tagmanager.png") no-repeat center center}
+tr td[type='mapsengine'] {background: url("icons/mapsengine.png") no-repeat center center}
+tr td[type='webhistory'] {background: url("icons/webhistory.png") no-repeat center center}
+tr td[type='chromebook'] {background: url("icons/chromebook.png") no-repeat center center}
+tr td[type='feedburner'] {background: url("icons/feedburner.png") no-repeat center center}
+tr td[type='urlshortner'] {background: url("icons/urlshortner.png") no-repeat center center}
+tr td[type='webpagetest'] {background: url("icons/webpagetest.png") no-repeat center center}
+tr td[type='earthengine'] {background: url("icons/earthengine.png") no-repeat center center}
+tr td[type='partnerdash'] {background: url("icons/partnerdash.png") no-repeat center center}
+tr td[type='presentation'] {background: url("icons/presentation.png") no-repeat center center}
+tr td[type='authenticator'] {background: url("icons/authenticator.png") no-repeat center center}
+tr td[type='computeengine'] {background: url("icons/computeengine.png") no-repeat center center}
+tr td[type='cloudeplatform'] {background: url("icons/cloudeplatform.png") no-repeat center center}
+tr td[type='developersdashboard'] {background: url("icons/developersdashboard.png") no-repeat center center}
+tr td[type='ymusic'] {background: url("icons/ymusic.png") no-repeat center center}
+tr td[type='movies'] {background: url("icons/movies.png") no-repeat center center}
+tr td[type='chromecast'] {background: url("icons/chromecast.png") no-repeat center center}
+tr td[type='cast'] {background: url("icons/cast.png") no-repeat center center}
+tr td[type='messages'] {background: url("icons/messages.png") no-repeat center center}
+tr td[type='duo'] {background: url("icons/duo.png") no-repeat center center}
+tr td[type='chat'] {background: url("icons/chat.png") no-repeat center center}
+tr td[type='keep'] {background: url("icons/keep.png") no-repeat center center}
+tr td[type='agenda'] {background: url("icons/agenda.png") no-repeat center center}
+tr td[type='ads'] {background: url("icons/ads.png") no-repeat center center}
+tr td[type='auto'] {background: url("icons/auto.png") no-repeat center center}
+tr td[type='cardboard'] {background: url("icons/cardboard.png") no-repeat center center}
+tr td[type='gboard'] {background: url("icons/gboard.png") no-repeat center center}
+tr td[type='assistant'] {background: url("icons/assistant.png") no-repeat center center}
+tr td[type='print'] {background: url("icons/print.png") no-repeat center center}
+tr td[type='expeditions'] {background: url("icons/expeditions.png") no-repeat center center}
+tr td[type='fit'] {background: url("icons/fit.png") no-repeat center center}
+tr td[type='meet'] {background: url("icons/meet.png") no-repeat center center}
+tr td[type='one'] {background: url("icons/one.png") no-repeat center center}
+tr td[type='games'] {background: url("icons/games.png") no-repeat center center}
+tr td[type='transcript'] {background: url("icons/transcript.png") no-repeat center center}
+tr td[type='wifi'] {background: url("icons/wifi.png") no-repeat center center}
+tr td[type='podcast'] {background: url("icons/podcast.png") no-repeat center center}
+tr td[type='stages'] {background: url("icons/stages.png") no-repeat center center}
+tr td[type='waze'] {background: url("icons/waze.png") no-repeat center center}
+tr td[type='ykids'] {background: url("icons/ykids.png") no-repeat center center}
+tr td[type='ytv'] {background: url("icons/ytv.png") no-repeat center center}
+tr td[type='art'] {background: url("icons/art.png") no-repeat center center}
