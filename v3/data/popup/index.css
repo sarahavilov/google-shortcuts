@@ -25,6 +25,7 @@ fieldset {
   overflow: hidden;
   display: none;
 }
+body.search.sexpand fieldset,
 body[data-expand=true] fieldset {
   display: unset;
   height: unset;
@@ -39,13 +40,12 @@ legend {
 #top,
 #bottom {
   display: grid;
+  min-height: 43px;
 }
 #toolbar {
   background-color: var(--bg);
   display: flex;
   width: 100vw;
-}
-#toolbar {
   justify-content: end;
   align-items: center;
 }
@@ -55,7 +55,6 @@ legend {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  border-right: solid 2px var(--border);
 }
 #rate,
 #faqs,
@@ -109,6 +108,7 @@ body[data-expand=true] #down {
   grid-template-columns: 80px 80px 1fr min-content;
   width: 100vw;
 }
+
 @media screen and (max-width: 400px) {
   #settings {
     grid-template-columns: 80px 80px 1fr 1fr;
@@ -146,10 +146,29 @@ body[data-settings=true] #settings {
   border-bottom: solid 1px transparent;
   transition: border-color 100ms;
 }
+.entry.highest {
+  background-color: #8eb6ff;
+}
 .entry:hover {
   border-bottom-color: red;
 }
 .disabled {
   opacity: 0.5;
   pointer-events: none;
+}
+
+#search {
+  border: solid 1px #616161;
+  padding: 5px;
+  outline: none;
+}
+#search:focus {
+  background-color: #eaf3ff;
+}
+#search.error {
+  background-color: #ffd8d8;
+}
+
+body.search .entry:not(.search) {
+  display: none;
 }

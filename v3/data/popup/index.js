@@ -1,4 +1,4 @@
-/* global Sortable */
+/* global Sortable, FuzzySet */
 
 const TOPS = [
   'music', 'news', 'book', 'groups', 'search', 'youtube', 'maps', 'play', 'gmail', 'calender',
@@ -27,6 +27,9 @@ const storage = {
   }
 };
 const build = async () => {
+  const entries = new Map();
+  const search = new FuzzySet();
+
   const prefs = await storage.get({
     products: {},
     tops: TOPS,
@@ -41,17 +44,21 @@ const build = async () => {
 
   const ftop = document.createDocumentFragment();
   for (const key of prefs.tops) {
-    const div = document.createElement('div');
-    div.classList.add('entry');
-    const src = prefs.products[key].icon || 'icons/' + key + '.png';
-    div.style['background-image'] = `url("${src}")`;
-    div.name = key;
-    div.title = prefs.products[key].desc;
-    div.href = prefs.products[key].href;
-    if (!div.href) {
-      div.classList.add('disabled');
+    if (key in prefs.products) {
+      const div = document.createElement('div');
+      div.classList.add('entry');
+      const src = prefs.products[key].icon || 'icons/' + key + '.png';
+      div.style['background-image'] = `url("${src}")`;
+      div.name = key;
+      div.title = prefs.products[key].desc;
+      div.href = prefs.products[key].href;
+      if (!div.href) {
+        div.classList.add('disabled');
+      }
+      ftop.appendChild(div);
+      search.add(div.title);
+      entries.set(div.title, div);
     }
-    ftop.appendChild(div);
   }
   e.top.appendChild(ftop);
   Sortable.create(e.top, {
@@ -67,10 +74,11 @@ const build = async () => {
   const keys = [
     ...prefs.bottoms,
     ...Object.keys(prefs.products)
-  ].filter(a => prefs.tops.indexOf(a) === -1).filter((s, i, l) => l.indexOf(s) === i);
+  ].filter((s, i, l) => l.indexOf(s) === i);
+
   const fbottom = document.createDocumentFragment();
   for (const key of keys) {
-    if (prefs.tops.indexOf(key) === -1) {
+    if (prefs.tops.includes(key) === false && key in prefs.products) {
       const div = document.createElement('div');
       div.classList.add('entry');
       const src = prefs.products[key].icon || 'icons/' + key + '.png';
@@ -83,6 +91,8 @@ const build = async () => {
         div.classList.add('disabled');
       }
       fbottom.appendChild(div);
+      search.add(div.title);
+      entries.set(div.title, div);
     }
   }
   e.bottom.appendChild(fbottom);
@@ -94,6 +104,25 @@ const build = async () => {
       setTimeout(save, 100);
     }
   });
+
+  build.search = q => {
+    const results = search.get(q, undefined, 0.01) || [];
+    const r = results.map(a => ({
+      item: {
+        title: a[1],
+        div: entries.get(a[1])
+      },
+      score: a[0]
+    }));
+
+    const score = Math.max(...results.map(a => a[0]));
+
+    return {
+      score,
+      top: r.filter(o => o.item.div.closest('#top')),
+      bottom: r.filter(o => !o.item.div.closest('#top'))
+    };
+  };
 };
 
 const start = () => storage.get({
@@ -224,7 +253,99 @@ document.addEventListener('click', async e => {
         url: href,
         index: tab.index + 1,
         active: e.metaKey === false && e.ctrlKey === false
-      });
+      }, () => window.close());
     }
+  }
+});
+
+// search
+const search = {
+  build(top, bottom, score) {
+    search.clear();
+
+    let highScoreInBottom = false;
+    let set = false;
+
+    for (const entry of top) {
+      entry.item.div.classList.add('search');
+      if (entry.score === score && !set) {
+        entry.item.div.classList.add('highest');
+        if (!set) {
+          set = true;
+          e.toast.textContent = entry.item.title;
+        }
+      }
+    }
+    for (const entry of bottom) {
+      entry.item.div.classList.add('search');
+      if (entry.score === score && !set) {
+        entry.item.div.classList.add('highest');
+        highScoreInBottom = true;
+        set = true;
+        e.toast.textContent = entry.item.title;
+      }
+    }
+
+    const expand = (bottom.length && top.length < 5) || highScoreInBottom;
+    document.body.classList[expand ? 'add' : 'remove']('sexpand');
+  },
+  clear() {
+    for (const e of document.querySelectorAll('.entry.search')) {
+      e.classList.remove('search');
+      e.classList.remove('highest');
+    }
+  }
+};
+
+document.getElementById('search').addEventListener('input', e => {
+  const v = e.target.value;
+
+  e.target.classList.remove('error');
+  if (v) {
+    document.body.classList.add('search');
+    const {top, bottom, score} = build.search(v);
+
+    if (top.length || bottom.length) {
+      return search.build(top, bottom, score);
+    }
+    else {
+      e.target.classList.add('error');
+    }
+  }
+  document.body.classList.remove('search');
+  search.clear();
+});
+document.getElementById('search').addEventListener('keydown', e => {
+  if (e.code === 'Enter') {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const entry =
+      document.querySelector('.entry.search.highest') ||
+      document.querySelector('.entry.search') ||
+      document.querySelector('.entry');
+
+    if (entry) {
+      const ne = new MouseEvent('click', e);
+      entry.dispatchEvent(ne);
+    }
+  }
+});
+document.addEventListener('keydown', e => {
+  const meta = e.metaKey || e.ctrlKey;
+  if (e.code === 'KeyF' && meta) {
+    e.preventDefault();
+    e.stopPropagation();
+    document.getElementById('search').focus();
+  }
+  else if (e.code === 'KeyE' && meta) {
+    e.preventDefault();
+    e.stopPropagation();
+    document.getElementById('down').click();
+  }
+  else if (e.code === 'KeyO' && meta) {
+    e.preventDefault();
+    e.stopPropagation();
+    document.getElementById('options').click();
   }
 });
