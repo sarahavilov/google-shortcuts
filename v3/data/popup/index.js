@@ -10,7 +10,8 @@ const e = {
   bottom: document.getElementById('bottom'),
   toast: document.getElementById('toast'),
   cols: document.getElementById('cols'),
-  size: document.getElementById('size')
+  size: document.getElementById('size'),
+  search: document.getElementById('search')
 };
 
 const save = () => {
@@ -150,6 +151,9 @@ chrome.storage.onChanged.addListener(ps => {
 });
 
 document.getElementById('down').onclick = () => {
+  e.search.value = '';
+  e.search.dispatchEvent(new Event('input'));
+
   document.body.dataset.expand = document.body.dataset.expand === 'false';
 };
 
@@ -297,7 +301,7 @@ const search = {
   }
 };
 
-document.getElementById('search').addEventListener('input', e => {
+e.search.addEventListener('input', e => {
   const v = e.target.value;
 
   e.target.classList.remove('error');
@@ -315,7 +319,7 @@ document.getElementById('search').addEventListener('input', e => {
   document.body.classList.remove('search');
   search.clear();
 });
-document.getElementById('search').addEventListener('keydown', e => {
+e.search.addEventListener('keydown', e => {
   if (e.code === 'Enter') {
     e.preventDefault();
     e.stopPropagation();
@@ -336,7 +340,7 @@ document.addEventListener('keydown', e => {
   if (e.code === 'KeyF' && meta) {
     e.preventDefault();
     e.stopPropagation();
-    document.getElementById('search').focus();
+    e.search.focus();
   }
   else if (e.code === 'KeyE' && meta) {
     e.preventDefault();
