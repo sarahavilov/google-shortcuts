@@ -2,14 +2,14 @@
   "manifest_version": 3,
   "name": "Shortcuts for Google™ Products",
   "description": "Displays all Google products in a single, space-saving, drop-down panel",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "permissions": [
     "storage"
   ],
   "background": {
     "service_worker": "worker.js"
   },
-  "homepage_url": "https://add0n.com/google-shortcuts.html",
+  "homepage_url": "https://webextension.org/listing/google-shortcuts.html",
   "action": {
     "default_popup": "data/popup/index.html"
   },
