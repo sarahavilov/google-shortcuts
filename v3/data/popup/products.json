@@ -293,7 +293,7 @@
   },
   "photos": {
     "desc": "Google Photos",
-    "href": "https://plus.google.com/photos/"
+    "href": "https://photos.google.com/"
   },
   "local": {
     "desc": "Google Local",
@@ -522,5 +522,85 @@
   "expeditions": {
     "desc": "Google Expeditions",
     "href": "https://www.google.co.in/edu/expeditions/"
+  },
+  "nest": {
+    "type": "hardware",
+    "href": "https://store.google.com/us/category/connected-home",
+    "desc": "Home devices (thermostats, cameras, doorbells, smoke alarms, etc.)"
+  },
+  "pixelbook": {
+    "type": "hardware",
+    "href": "https://www.google.com/chromebook",
+    "desc": "Laptops"
+  },
+  "workspace": {
+    "type": "software",
+    "href": "https://workspace.google.com/",
+    "desc": "Suite of productivity apps (formerly G Suite)"
+  },
+  "stadia": {
+    "type": "software",
+    "href": "https://stadia.google.com/",
+    "desc": "Cloud gaming platform"
+  },
+  "pay": {
+    "type": "software",
+    "href": "https://pay.google.com/",
+    "desc": "Digital wallet"
+  },
+  "art": {
+    "type": "software",
+    "href": "https://artsandculture.google.com/",
+    "desc": "Arts and cultural artifacts platform"
+  },
+  "lens": {
+    "type": "software",
+    "href": "https://lens.google/",
+    "desc": "Image recognition tool"
+  },
+  "actionblocks": {
+    "type": "software",
+    "href": "https://play.google.com/store/apps/details?id=com.google.android.apps.accessibility.maui.actionblocks",
+    "desc": "Customizable Android home screen buttons"
+  },
+  "dns": {
+    "type": "software",
+    "href": "https://developers.google.com/speed/public-dns",
+    "desc": "Domain Name System service"
+  },
+  "fuchsia": {
+    "type": "software",
+    "href": "https://fuchsia.dev/",
+    "desc": "Experimental operating system"
+  },
+  "fiber": {
+    "type": "service",
+    "href": "https://fiber.google.com/",
+    "desc": "High-speed internet service"
+  },
+  "explorer": {
+    "type": "service",
+    "href": "https://www.google.com/publicdata/directory",
+    "desc": "Public data visualization tool"
+  },
+  "sunroof": {
+    "type": "service",
+    "href": "https://sunroof.withgoogle.com/",
+    "desc": "Solar panel mapping service"
+  },
+  "ai": {
+    "type": "service",
+    "href": "https://ai.google/",
+    "desc": "Research division for artificial intelligence"
+  },
+  "deepmind": {
+    "type": "service",
+    "href": "https://deepmind.com/",
+    "desc": "AI research lab"
+  },
+  "Jigsaw": {
+    "type": "service",
+    "href": "https://jigsaw.google.com/",
+    "desc": "Technology incubator to tackle global security challenges"
   }
 }

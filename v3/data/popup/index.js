@@ -30,6 +30,7 @@ const storage = {
 const build = async () => {
   const entries = new Map();
   const search = new FuzzySet();
+  search.useLevenshtein = false;
 
   const prefs = await storage.get({
     products: {},
@@ -48,6 +49,8 @@ const build = async () => {
     if (key in prefs.products) {
       const div = document.createElement('div');
       div.classList.add('entry');
+      div.setAttribute('tabindex', '0');
+      div.setAttribute('role', 'button');
       const src = prefs.products[key].icon || 'icons/' + key + '.png';
       div.style['background-image'] = `url("${src}")`;
       div.name = key;
@@ -57,8 +60,10 @@ const build = async () => {
         div.classList.add('disabled');
       }
       ftop.appendChild(div);
-      search.add(div.title);
-      entries.set(div.title, div);
+
+      const q = div.title + ' ' + key;
+      search.add(q);
+      entries.set(q, div);
     }
   }
   e.top.appendChild(ftop);
@@ -82,6 +87,8 @@ const build = async () => {
     if (prefs.tops.includes(key) === false && key in prefs.products) {
       const div = document.createElement('div');
       div.classList.add('entry');
+      div.setAttribute('tabindex', '0');
+      div.setAttribute('role', 'button');
       const src = prefs.products[key].icon || 'icons/' + key + '.png';
       div.style['background-image'] = `url("${src}")`;
       div.name = key;
@@ -92,8 +99,10 @@ const build = async () => {
         div.classList.add('disabled');
       }
       fbottom.appendChild(div);
-      search.add(div.title);
-      entries.set(div.title, div);
+
+      const q = div.title + ' ' + key;
+      search.add(q);
+      entries.set(q, div);
     }
   }
   e.bottom.appendChild(fbottom);
@@ -108,13 +117,18 @@ const build = async () => {
 
   build.search = q => {
     const results = search.get(q, undefined, 0.01) || [];
-    const r = results.map(a => ({
-      item: {
-        title: a[1],
-        div: entries.get(a[1])
-      },
-      score: a[0]
-    }));
+
+    const r = results.map(a => {
+      const div = entries.get(a[1]);
+
+      return {
+        item: {
+          title: div.title,
+          div
+        },
+        score: a[0]
+      };
+    });
 
     const score = Math.max(...results.map(a => a[0]));
 
@@ -189,10 +203,14 @@ document.getElementById('add').onclick = async () => {
   });
 };
 
-document.addEventListener('mouseover', ({target}) => {
-  const title = target.title;
-  e.toast.textContent = title || '...';
-});
+{
+  const change = ({target}) => {
+    const title = target.title;
+    e.toast.textContent = title || '...';
+  };
+  document.addEventListener('mouseover', change);
+  document.addEventListener('focusin', change);
+}
 
 document.getElementById('size').onchange = ({target}) => {
   const size = Math.min(64, Math.max(16, Number(target.value)));
@@ -253,11 +271,36 @@ document.addEventListener('click', async e => {
         active: true
       })).shift();
 
+      const active = e.metaKey === false && e.ctrlKey === false;
       chrome.tabs.create({
         url: href,
         index: tab.index + 1,
-        active: e.metaKey === false && e.ctrlKey === false
-      }, () => window.close());
+        active
+      }, () => {
+        if (active) {
+          window.close();
+        }
+      });
+    }
+  }
+});
+document.addEventListener('keydown', e => {
+  if (e.code === 'Enter' || e.key === 'Enter') {
+    e.preventDefault();
+    e.stopPropagation();
+
+    let entry;
+    if (document.activeElement?.classList?.contains('entry')) {
+      entry = document.activeElement;
+    }
+    entry = entry ||
+      document.querySelector('.entry.search.highest') ||
+      document.querySelector('.entry.search') ||
+      document.querySelector('.entry');
+
+    if (entry) {
+      const ne = new MouseEvent('click', e);
+      entry.dispatchEvent(ne);
     }
   }
 });
@@ -319,37 +362,21 @@ e.search.addEventListener('input', e => {
   document.body.classList.remove('search');
   search.clear();
 });
-e.search.addEventListener('keydown', e => {
-  if (e.code === 'Enter') {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const entry =
-      document.querySelector('.entry.search.highest') ||
-      document.querySelector('.entry.search') ||
-      document.querySelector('.entry');
-
-    if (entry) {
-      const ne = new MouseEvent('click', e);
-      entry.dispatchEvent(ne);
-    }
-  }
-});
-document.addEventListener('keydown', e => {
-  const meta = e.metaKey || e.ctrlKey;
-  if (e.code === 'KeyF' && meta) {
-    e.preventDefault();
-    e.stopPropagation();
+document.addEventListener('keydown', ev => {
+  const meta = ev.metaKey || ev.ctrlKey;
+  if (ev.code === 'KeyF' && meta) {
+    ev.preventDefault();
+    ev.stopPropagation();
     e.search.focus();
   }
-  else if (e.code === 'KeyE' && meta) {
-    e.preventDefault();
-    e.stopPropagation();
+  else if (ev.code === 'KeyE' && meta) {
+    ev.preventDefault();
+    ev.stopPropagation();
     document.getElementById('down').click();
   }
-  else if (e.code === 'KeyO' && meta) {
-    e.preventDefault();
-    e.stopPropagation();
+  else if (ev.code === 'KeyO' && meta) {
+    ev.preventDefault();
+    ev.stopPropagation();
     document.getElementById('options').click();
   }
 });
