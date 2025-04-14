@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Shortcuts for Google™ Products</title>
+  <style type="text/css" id="user-style"></style>
   <link rel="stylesheet" type="text/css" href="index.css">
   <meta name="google" content="notranslate"/>
 </head>
@@ -15,16 +16,35 @@
   </fieldset>
   <div id="toolbar">
     <span id="toast">...</span>
-    <input type="search" id="search" placeholder="Search" autofocus title="Search for a Product (Ctrl/Command + F). Press Enter to open the best match. Press Shift + Enter to open in background tab">
-    <input type="button" value="" id="down" title="Expand or Collapse Products (Ctrl/Command + E)">
-    <input type="button" value="" id="options" title="Open Options (Ctrl/Command + O)">
-    <input type="button" value="" id="rate" title="Rate Us">
-    <input type="button" value="" id="faqs" title="Open FAQs Page">
+    <input type="search" id="search" placeholder="Search" autofocus title="Search for a Product (Ctrl/Command + F). Press Enter to open the best match. Press Shift + Enter to open in background tab. Press Ctrl/Command + Enter to focus the best match.">
+    <button id="down" title="Expand or Collapse Products (Ctrl/Command + E)">
+      <svg fill="none" width="22" height="22" viewBox="0 0 24 24">
+        <path d="M9.29289 6.20711C8.90237 5.81658 8.90237 5.18342 9.29289 4.79289C9.68342 4.40237 10.3166 4.40237 10.7071 4.79289L12 6.08579L13.2929 4.79289C13.6834 4.40237 14.3166 4.40237 14.7071 4.79289C15.0976 5.18342 15.0976 5.81658 14.7071 6.20711L12.7071 8.20711C12.3166 8.59763 11.6834 8.59763 11.2929 8.20711L9.29289 6.20711Z"/>
+        <path d="M3 12C3 11.4477 3.44772 11 4 11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H4C3.44772 13 3 12.5523 3 12Z"/>
+        <path d="M3 18C3 17.4477 3.44772 17 4 17H20C20.5523 17 21 17.4477 21 18C21 18.5523 20.5523 19 20 19H4C3.44772 19 3 18.5523 3 18Z"/>
+      </svg>
+    </button>
+    <button id="options" title="Open Options (Ctrl/Command + O)">
+      <svg width="22" height="22" viewBox="0 0 48 48">
+        <path d="M0 0h48v48H0z" fill="none"/><path d="M38.86 25.95c.08-.64.14-1.29.14-1.95s-.06-1.31-.14-1.95l4.23-3.31c.38-.3.49-.84.24-1.28l-4-6.93c-.25-.43-.77-.61-1.22-.43l-4.98 2.01c-1.03-.79-2.16-1.46-3.38-1.97L29 4.84c-.09-.47-.5-.84-1-.84h-8c-.5 0-.91.37-.99.84l-.75 5.3c-1.22.51-2.35 1.17-3.38 1.97L9.9 10.1c-.45-.17-.97 0-1.22.43l-4 6.93c-.25.43-.14.97.24 1.28l4.22 3.31C9.06 22.69 9 23.34 9 24s.06 1.31.14 1.95l-4.22 3.31c-.38.3-.49.84-.24 1.28l4 6.93c.25.43.77.61 1.22.43l4.98-2.01c1.03.79 2.16 1.46 3.38 1.97l.75 5.3c.08.47.49.84.99.84h8c.5 0 .91-.37.99-.84l.75-5.3c1.22-.51 2.35-1.17 3.38-1.97l4.98 2.01c.45.17.97 0 1.22-.43l4-6.93c.25-.43.14-.97-.24-1.28l-4.22-3.31zM24 31c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
+      </svg>
+    </button>
+    <button id="rate" title="Rate Us">
+      <svg width="20" height="20" viewBox="0 0 20 21">
+        <path d="M20,7.244 L12.809,6.627 L10,0 L7.191,6.627 L0,7.244 L5.455,11.971 L3.82,19 L10,15.272 L16.18,19 L14.545,11.971 L20,7.244 L20,7.244 Z M10,13.396 L6.237,15.666 L7.233,11.385 L3.91,8.507 L8.29,8.131 L10,4.095 L11.71,8.131 L16.09,8.507 L12.768,11.385 L13.764,15.666 L10,13.396 L10,13.396 Z"/>
+      </svg>
+    </button>
+    <button id="faqs" title="Open FAQs Page">
+      <svg width="22" height="22" viewBox="0 0 48 48">
+        <path d="M20 40V28h8v12h10V24h6L24 6 4 24h6v16z"/>
+        <path d="M0 0h48v48H0z" fill="none"/>
+    </button>
     <input type="submit" value="" class="hidden">
   </div>
   <div id="settings">
     <input type="number" id="size" min="16" max="64" title="Change icon size (value is from 16 to 64)">
     <input type="number" id="cols" min="8" max="24" title="Change number of columns (value is from 8 to 24)">
+    <input type="button" id="css" value="Custom Styling" title="Change styling of this interface using CSS">
     <input type="button" id="add" value="Add or Remove a Product" title="Add a new product or remove existing one">
     <input type="button" id="reset" value="Factory Reset">
   </div>

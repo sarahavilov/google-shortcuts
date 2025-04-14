@@ -25,5 +25,15 @@
   },
   "commands": {
     "_execute_action": {}
+  },
+  "options_ui": {
+    "open_in_tab": true,
+    "page": "/data/options/index.html"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "jid1-SVJwkBGCTt4PyQ@jetpack",
+      "strict_min_version": "128.0"
+    }
   }
 }

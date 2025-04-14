@@ -1,5 +1,9 @@
 /* global Sortable, FuzzySet */
 
+chrome.storage.local.get({
+  'user-style': ''
+}, prefs => document.getElementById('user-style').textContent = prefs['user-style']);
+
 const TOPS = [
   'music', 'news', 'book', 'groups', 'search', 'youtube', 'maps', 'play', 'gmail', 'calender',
   'drive', 'shopping', 'keep', 'translate', 'print', 'alerts', 'analytics', 'duo'
@@ -191,6 +195,8 @@ document.getElementById('reset').onclick = () => {
   }
 };
 
+document.getElementById('css').onclick = () => chrome.runtime.openOptionsPage();
+
 document.getElementById('add').onclick = async () => {
   const win = await chrome.windows.getCurrent();
   chrome.windows.create({
@@ -299,8 +305,14 @@ document.addEventListener('keydown', e => {
       document.querySelector('.entry');
 
     if (entry) {
-      const ne = new MouseEvent('click', e);
-      entry.dispatchEvent(ne);
+      const meta = e.metaKey || e.ctrlKey;
+      if (meta) {
+        entry.focus();
+      }
+      else {
+        const ne = new MouseEvent('click', e);
+        entry.dispatchEvent(ne);
+      }
     }
   }
 });
@@ -367,6 +379,7 @@ document.addEventListener('keydown', ev => {
   if (ev.code === 'KeyF' && meta) {
     ev.preventDefault();
     ev.stopPropagation();
+    e.search.select();
     e.search.focus();
   }
   else if (ev.code === 'KeyE' && meta) {
