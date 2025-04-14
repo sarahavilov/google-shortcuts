@@ -145,7 +145,7 @@ const build = async () => {
 };
 
 const start = () => storage.get({
-  cols: 14,
+  cols: 12,
   size: 32
 }).then(prefs => {
   e.top.style['grid-template-columns'] = `repeat(${prefs.cols}, min-content)`;

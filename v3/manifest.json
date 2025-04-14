@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Shortcuts for Google™ Products",
   "description": "Displays all Google products in a single, space-saving, drop-down panel",
-  "version": "2.0.9",
+  "version": "2.1.0",
   "permissions": [
     "storage"
   ],
