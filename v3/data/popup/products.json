@@ -47,6 +47,10 @@
     "desc": "Google Finance",
     "href": "https://www.google.com/finance"
   },
+  "gemini": {
+    "desc": "Google Gemini",
+    "href": "https://gemini.google.com/"
+  },
   "gmail": {
     "desc": "Google Mail",
     "href": "https://mail.google.com/mail/"
@@ -79,9 +83,17 @@
     "desc": "Panoramio",
     "href": "https://www.panoramio.com/"
   },
+  "pixel": {
+    "desc": "Google Pixel",
+    "href": "https://store.google.com/category/phones"
+  },
   "picasa": {
     "desc": "Picasa (Google Photos)",
     "href": "https://photos.google.com/"
+  },
+  "notebooklm": {
+    "desc": "Google NotebookLM",
+    "href": "https://notebooklm.google/"
   },
   "play": {
     "desc": "Google Play",
@@ -531,7 +543,7 @@
   "pixelbook": {
     "type": "hardware",
     "href": "https://www.google.com/chromebook",
-    "desc": "Laptops"
+    "desc": "Google Chromebooks"
   },
   "workspace": {
     "type": "software",
