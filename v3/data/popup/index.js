@@ -209,6 +209,31 @@ document.getElementById('add').onclick = async () => {
   });
 };
 
+document.getElementById('add-tab').onclick = async () => {
+  let tab;
+  try {
+    if (await chrome.permissions.request({permissions: ['activeTab']})) {
+      tab = (await chrome.tabs.query({
+        active: true,
+        currentWindow: true
+      })).shift();
+    }
+  }
+  catch (e) {}
+
+  const q = tab ? `?title=${encodeURIComponent(tab.title || '')}&href=${encodeURIComponent(tab.url || '')}&favicon=${encodeURIComponent(tab.favIconUrl || '')}` : '';
+
+  const win = await chrome.windows.getCurrent();
+  chrome.windows.create({
+    url: '/data/add/index.html' + q,
+    width: 600,
+    height: 360,
+    left: win.left + Math.round((win.width - 600) / 2),
+    top: win.top + Math.round((win.height - 300) / 2),
+    type: 'popup'
+  });
+};
+
 {
   const change = ({target}) => {
     const title = target.title;

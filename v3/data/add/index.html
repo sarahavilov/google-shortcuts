@@ -7,18 +7,29 @@
   <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
-  <form class="two">
-    <span>Title</span>
-    <input type="text" id="title" required placeholder="e.g. Google Homepage">
-    <span>URL</span>
-    <input type="text" id="href" required placeholder="e.g. https://www.google.com">
-    <span>Icon</span>
-    <input type="file" id="file" required accept="image/*">
-    <span></span>
-    <input type="submit" value="Add Product">
+  <form>
+    <div class="two">
+      <span>Title</span>
+      <input type="text" id="title" required placeholder="e.g. Google Homepage">
+      <span>URL</span>
+      <input type="text" id="href" required placeholder="e.g. https://www.google.com">
+      <span>Icon</span>
+      <div class="file">
+        <input type="checkbox" id="favicon">
+        <label for="favicon" id="favicon-label">Use page favicon or </label>
+        <input type="file" id="file" accept="image/*">
+        <input type="button" id="browse" value="Browse...">
+      </div>
+    </div>
+    <div class="buttons">
+      <span id="note"></span>
+      <input type="submit" value="Add Product">
+    </div>
   </form>
   <form id="remove">
-    <div id="products" class="two"></div>
+    <div id="products">
+      <div class="two"></div>
+    </div>
     <div class="two" style="margin-top: 5px;">
       <span></span>
       <input type="submit" value="Remove selected Product(s)" disabled>
