@@ -115,24 +115,13 @@ body[data-expand="true"] #down {
 }
 #settings {
   display: none;
+  overflow: hidden;
   border-top: solid 1px var(--border);
   background-color: var(--bg);
-  grid-template-columns: 80px 80px 1fr 1fr;
+  grid-template-columns: 80px 80px minmax(0, 1fr) minmax(0, 1fr);
   grid-template-rows: auto auto;
   width: 100vw;
   grid-gap: 1px;
-}
-#settings #size {
-  grid-column: 1;
-  grid-row: 1;
-}
-#settings #cols {
-  grid-column: 2;
-  grid-row: 1;
-}
-#settings #css {
-  grid-column: 3;
-  grid-row: 1;
 }
 #settings #reset {
   grid-column: 4;
